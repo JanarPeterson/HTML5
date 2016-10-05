@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>sound</title>
+	<meta charset="utf-8">
+	<script src="simpleGame.js"></script>
+	<script type="text/javascript">
+		var scene;
+		var beatMP3;
+
+		function init() {
+			scene = new Scene();
+			beatMP3 = new Sound("beat.mp3");
+			scene.start();
+		}
+		function update() {
+			if (keysDown[K_SPACE]) {
+				beatMP3.play();
+			}
+		}
+	</script>
+</head>
+<body onload="init()">
+
+</body>
+</html>

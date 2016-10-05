@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>colTest</title>
+	<script src="simpleGame.js"></script>
+	<script type="text/javascript">
+		var box;
+		var critter;
+		var game;
+		var output;
+
+		function init() {
+			game = new Scene();
+			game.hideCursor();
+			box = new Sprite(game, "simpleBox.png", 50, 50);
+			critter = new Sprite(game, "critter.gif", 50, 50);
+
+			output = document.getElementById("output");
+
+			box.setPosition(200, 150);
+			box.setSpeed(0);
+
+			critter.setPosition(100, 100);
+			critter.setSpeed(0);
+			critter.followMouse = function() {
+				this.setX(document.mouseX);
+				this.setY(document.mouseY);
+			}
+			game.start();
+		}
+
+		function update() {
+			game.clear();
+			critter.followMouse();
+			checkCollisions();
+			box.update();
+			critter.update();
+		}
+
+		function checkCollisions() {
+			if (box.collidesWith(critter)) {
+				output.innerHTML = "collision";
+			}else {
+				output.innerHTML = " no collision";
+			}
+		}
+	</script>
+</head>
+<body onload="init()">
+	<div id="output">
+		empty
+	</div>
+</body>
+</html>

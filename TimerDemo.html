@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>TimerDemo</title>
+    <script src="simpleGame.js"></script>
+    <script type="text/javascript">
+      var timer, output, game;
+
+      function init() {
+        game = new Scene();
+        output = document.getElementById("output");
+        timer = new Timer();
+        timer.reset();
+        game.start();
+      }
+      function update() {
+        game.hide();
+        currentTime = timer.getElapsedTime();
+        output.innerHTML = currentTime;
+      }
+      function reset() {
+        timer.reset();
+      }
+    </script>
+  </head>
+  <body onload="init()">
+    <div id="output">
+      empty
+    </div>
+    <button onclick="reset()">reset the timer</button>
+  </body>
+</html>

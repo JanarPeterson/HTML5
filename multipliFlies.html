@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MultiplieFiles</title>
+    <script src="simpleGame.js"></script>
+    <script src="frogLib.js"></script>
+    <script type="text/javascript">
+      var scene, frog, leaves, fly, hits, scoreBoard, ribbitOGG, ribbitMP3;
+      var flies;
+      var NUMFLIES = 3;
+
+      function init() {
+        hits = 0;
+        scoreBoard = document.getElementById("scoreBoard");
+        scene = new Scene();
+        scene.setBG("green");
+        setUpFlies();
+        leaves = new Sprite(scene, "leaves.png", 800, 600);
+        leaves.setPosition(400, 300);
+        leaves.setSpeed(0);
+        frog = new Frog();
+        ribbitOGG = new Sound("ribbit.ogg");
+        ribbitMP3 = new Sound("ribbit.mp3");
+        scene.start();
+      }
+
+      function update() {
+        scene.clear();
+        frog.checkKeys();
+        leaves.update();
+        for (var i = 0; i < NUMFLIES; i++) {
+          flies[i].wriggle();
+          checkCollisions(i);
+          flies[i].update();
+        }
+        frog.update();
+      }
+
+      function setUpFlies() {
+        flies = new Array(NUMFLIES);
+        for (var i = 0; i < NUMFLIES; i++) {
+          flies[i] = new Fly();
+        }
+      }
+
+      function checkCollisions(flynum) {
+        if (frog.collidesWith(flies[flynum])) {
+        flies[flynum].reset();
+        ribbitOGG.play();
+        ribbitMP3.play();
+        updateScoreBoard();
+      }
+      }
+
+      function updateScoreBoard() {
+        hits += 1;
+        scoreBoard.innerHTML = "Hits: " + hits;
+      }
+    </script>
+  </head>
+  <body onload="init()">
+    <div id="scoreBoard">
+      hits: 0
+    </div>
+
+  </body>
+</html>

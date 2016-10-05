@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Timing</title>
+    <style media="screen">
+      #reset{
+        position: absolute;
+        left: 350px;
+        top: 550px;
+        z-index:100;
+      }
+    </style>
+    <script src="simpleGame.js"></script>
+    <script src="frogLib.js"></script>
+    <script type="text/javascript">
+      var scene, frog, leaves, fly, hits, scoreBoard, ribbitOGG, ribbitMP3;
+      var flies;
+      var NUMFLIES = 3;
+      var MAXTIME = 10;
+      var timer;
+      var time;
+
+      function init() {
+        hits = 0;
+        scoreBoard = document.getElementById("scoreBoard");
+        scene = new Scene();
+        scene.setBG("green");
+        timer = new Timer();
+        setUpFlies();
+        leaves = new Sprite(scene, "leaves.png", 800, 600);
+        leaves.setPosition(400, 300);
+        leaves.setSpeed(0);
+        frog = new Frog();
+        ribbitOGG = new Sound("ribbit.ogg");
+        ribbitMP3 = new Sound("ribbit.mp3");
+        scene.start();
+      }
+
+      function update() {
+        scene.clear();
+        checkTime();
+        frog.checkKeys();
+        leaves.update();
+        for (var i = 0; i < NUMFLIES; i++) {
+          flies[i].wriggle();
+          checkCollisions(i);
+          flies[i].update();
+        }
+        frog.update();
+      }
+
+      function setUpFlies() {
+        flies = new Array(NUMFLIES);
+        for (var i = 0; i < NUMFLIES; i++) {
+          flies[i] = new Fly();
+        }
+      }
+
+      function checkCollisions(flynum) {
+        if (frog.collidesWith(flies[flynum])) {
+        flies[flynum].reset();
+        ribbitOGG.play();
+        ribbitMP3.play();
+          hits += 1;
+        updateScoreBoard();
+      }
+      }
+
+      function updateScoreBoard() {
+        scoreBoard.innerHTML = "Hits: " + hits + " Time: " + time;
+      }
+
+      function checkTime() {
+        time = timer.getElapsedTime();
+        if (time > MAXTIME) {
+          scene.stop();
+        }
+        updateScoreBoard();
+      }
+
+      function restart() {
+        document.location.href = "";
+      }
+    </script>
+  </head>
+  <body onload="init()">
+    <div id="scoreBoard">
+      hits: 0
+    </div>
+<div id="reset">
+  <button onclick="restart()" name="button">Play again</button>
+</div>
+  </body>
+</html>

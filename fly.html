@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Fly</title>
+    <script src="simpleGame.js"></script>
+    <script type="text/javascript">
+      var scene, fly, output;
+
+      function Fly() {
+        tFly = new Sprite(scene, "fly.png", 20, 20);
+        tFly.setSpeed(10);
+        tFly.wriggle = function () {
+          nDir = (Math.random()*90)-45;
+          this.changeAngleBy(nDir);
+        }
+        return tFly;
+      }
+
+      function init() {
+        scene = new Scene();
+        scene.setBG("green");
+        output = document.getElementById("output");
+        fly = new Fly();
+        scene.start();
+      }
+      function update() {
+        scene.clear();
+        fly.wriggle();
+        fly.update();
+      }
+    </script>
+  </head>
+  <body onload="init()">
+    <div id="output">
+
+    </div>
+  </body>
+</html>

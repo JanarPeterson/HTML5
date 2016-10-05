@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Guesser</title>
+    <link rel="stylesheet" href="nubGuesser.css" media="screen" title="no title" charset="utf-8">
+    <script type="text/javascript" src="nubGuesser.js"></script>
+  </head>
+  <body onload="init()">
+    <h1>Number Guesser</h1>
+    <form>
+      <fieldset>
+        <div id="output">
+                  I’m thinking of a number between 0 and 100.        Guess my number, and I’ll tell if you are        too high, too low, or correct.
+        </div>
+        <label for=""> your guess</label>
+        <input type="text" id="txtGuess">
+
+        <button type="button" onclick="checkGuess()" id="check">Check my guess</button>
+        <button type="button" onclick="init()" id="again">Try again</reset>
+
+      </fieldset>
+    </form>
+  </body>
+</html>

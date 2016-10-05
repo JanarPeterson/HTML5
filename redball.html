@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Redball</title>
+    <script src="simpleGame.js"></script>
+    <script type="text/javascript">
+      var scene;
+      var ball;
+
+      function init() {
+        scene = new Scene();
+        ball = new Sprite(scene, "RedBall.png", 50, 50);
+        ball.setMoveAngle(180);
+        ball.setSpeed(3);
+
+        scene.start();
+      }
+
+      function update() {
+        scene.clear();
+        ball.update();
+      }
+
+    </script>
+  </head>
+  <body onload="init()">
+
+  </body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>random</title>
+    <style>
+      fieldset{
+        width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+
+      }
+      label{
+        float: left;
+        font-weight: bold;
+        text-align: center;
+        clear: left;
+        width: 250px;
+        margin-right: 1em;
+      }
+      span{
+        float: left;
+      }
+      button{
+        display: block;
+        clear: both;
+        margin: auto;
+      }
+      h1{
+        text-align: center;
+      }
+    </style>
+    <script type="text/javascript">
+
+      function roll(){
+        var spnraw = document.getElementById("spnraw");
+        var spn100 = document.getElementById("spn100");
+        var spnfinal = document.getElementById("spnfinal");
+
+        var raw = Math.random();
+        spnraw.innerHTML = raw;
+
+        var m100 = raw*100;
+        spn100.innerHTML = m100;
+
+        var final = Math.ceil(m100);
+        spnfinal.innerHTML = final;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Make random number between 1-100</h1>
+    <form action="">
+      <fieldset>
+        <label>raw</label>
+        <span id="spnraw">0</span><br/>
+        <label>Multiplied 100 </label>
+        <span id="spn100">0</span><br/>
+        <label>final</label>
+        <span id="spnfinal">0</span><br/>
+        <button onclick="roll()" type="button">roll</button>
+      </fieldset>
+    </form>
+  </body>
+</html>
